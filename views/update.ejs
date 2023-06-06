@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Update user info</h1>
-        <form action="/updateinfo/<%=user._id%>/?_method=put" method="post">
+        <form action="/login/user/updateinfo/<%=user._id%>/?_method=put" method="post">
             <label for="username">Username</label>
             <input type="text" placeholder="username" name="username" id="username" value="<%=user.username%>" required>
             <label for="email">Email</label>

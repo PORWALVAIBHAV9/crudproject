@@ -37,6 +37,17 @@ then((res)=> {
 
 app.use(session(sessionConfig))
 
+const password_check = (req,res,next)=>{
+    const {password,confirm_password} =req.body;
+    if(password === confirm_password){
+        next();
+        
+    }
+    else{
+        res.send("password doesn't match")
+    }
+
+}
 
 
 app.get('/home',(req,res)=>{
@@ -51,7 +62,7 @@ app.get('/login',(req,res)=>{
     res.render('login')
 })
 
-app.get('/userinfo/:id',authenticate,async(req,res)=>{
+app.get('/user/userinfo/:id',authenticate,async(req,res)=>{
     const {id} = req.params;
     const user = await User.findById(id);
     const user_lis = [user]
@@ -59,17 +70,27 @@ app.get('/userinfo/:id',authenticate,async(req,res)=>{
     
 }) 
 
-app.post('/newuser',async(req,res)=>{
+app.get("/login/user/changepassword/:id", authenticate,(req,res)=>{
+    const {id} = req.params;
+    res.render('password',{id})
+})
+
+app.get("/login/user/admin/allusers",async(req,res)=>{
+    const allUsers = await User.find()
+    res.render('allUsers', {allUsers})
+})
+
+app.post('/register/new_user',async(req,res)=>{
     const{username,email,contact,password} = req.body;
     const salt = await bcrypt.genSalt(10)
     const hashedpassword= await bcrypt.hash(password, salt)
     const newUser = await new User({username,email,contact,password:hashedpassword})
     await newUser.save();
     req.session.user = newUser._id
-    res.redirect(`/userinfo/${newUser._id}`)
+    res.redirect(`/user/userinfo/${newUser._id}`)
 })
 
-app.post('/login',async(req,res)=>{
+app.post('/login/user',async(req,res)=>{
     const {username,password} = req.body;
     const user = await User.find({username:username});
     if (user[0]){
@@ -78,7 +99,7 @@ app.post('/login',async(req,res)=>{
     if (login){ 
         req.session.user = user[0]._id
         console.log(req.session)
-        res.render("userinfo",{user})
+        res.redirect(`/user/userinfo/${user[0].id}`)
 
     }
     else{res.send("Username or Password wrong")}
@@ -89,30 +110,41 @@ app.post('/login',async(req,res)=>{
 
 })
 
-app.get('/updateinfo/:id',authenticate,async(req,res)=>{
+app.get('/login/user/updateinfo/:id',authenticate,async(req,res)=>{
     const {id} =req.params;
     console.log(id)
     const user = await User.findById(id)
     res.render('update', {user})
 })
 
-app.put('/updateinfo/:id',authenticate,async(req,res)=>{
+app.delete("/login/user/delete_user/:id",async(req,res)=>{
+    const {id}= req.params;
+    const del = await User.findByIdAndDelete(id)
+    console.log(del);
+    res.send("USER DELETED SUCCESSFULLY")
+})
+
+app.put('/login/user/updateinfo/:id',authenticate,async(req,res)=>{
     const {id} = req.params;
     const {username,email,contact} = req.body;
     const user = await User.findById(id);
     const updated_user = await User.updateOne({_id:id},{ $set: { username,email,contact } })
-    res.redirect(`/userinfo/${id}`)
+    res.redirect(`/login/user/updateinfo/${id}`)
     
 
 }
 )
 
+app.put('/login/user/changepassword/:id',password_check,async(req,res)=>{
+    const {id} = req.params;
+    const {password} =req.body;
+    const salt = await bcrypt.genSalt(10);
+    const changed_password= await bcrypt.hash(password, salt);
+    await User.findByIdAndUpdate(id, {password: changed_password})
 
-
-
-
-
-
+    res.send("PASSWORD CHANGED SUCCESSFULLY")
+    
+})
 
 
 

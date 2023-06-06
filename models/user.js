@@ -34,7 +34,4 @@ const userSchema = new mongoose.Schema({
 
 
 User = mongoose.model('User', userSchema);
-const newuser = new User({username:'vaibhav.varni',email:'vaibhav@gmail.com',password:'vaibhav123',contact:8554466556 })
-
-newuser.save();
 module.exports = User

@@ -12,6 +12,17 @@
     <h3>Mobile: <%=user[0].contact%> </h3>
     <h3>Email: <%=user[0].email%> </h3>
     
-    <button><a href="/updateinfo/<%=user[0]._id%>">update</a></button>
-</body>
+    <button><a href="/login/user/updateinfo/<%=user[0]._id%>">update</a></button>
+    <button><a href="/login/user/changepassword/<%=user[0]._id%>">Change Password</a></button>
+    <form action="/login/user/delete_user/<%=user[0]._id%>/?_method=delete" method="post">
+        <button>Delete user</button>
+    </form>
+
+    <%if (user[0].username=="admin"){%>
+        <button><a href="/login/user/admin/allusers">See all users</a></button>
+    <% } %>
+    
+</body>`
+
+
 </html> 
