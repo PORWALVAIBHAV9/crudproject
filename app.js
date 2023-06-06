@@ -11,6 +11,8 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({extended : true}))
 app.use(methodOverride('_method'))
 const session = require('express-session')
+const ejsMate = require('ejs-mate');
+app.engine('ejs', ejsMate);
 
 const authenticate = function(req,res,next){
     if (req.session.user){

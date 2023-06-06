@@ -1,24 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-</head>
-<body>
-    <h1>New user register</h1>
+<% layout('layouts/boilerplate') %>
+<div style="text-align: center; display:flex; flex-direction:column; margin-top: 250px; border: solid 2px; padding:10px; max-width: 400px; margin-left:550px;">
+    <h2 style="color:yellowgreen;">New user register</h2>
         <form action="/register/new_user" method="post">
-            <label for="username">Username</label>
-            <input type="text" placeholder="username" name="username" id="username" required>
-            <label for="password">Password</label>
-            <input type="password" placeholder="password" name="password" id="password" required>
-            <label for="email">Email</label>
-            <input type="email" placeholder="email" name="email" id="email" required>
-            <label for="mobile">Mobile</label>
-            <input type="number" placeholder="mobile number" name="contact" id="mobile" required>
-            <button>Submit</button>
+            <div style="margin:20px;">
+                <label for="username">Username</label>
+                <input type="text" placeholder="username" name="username" id="username" required>
+            </div>
+            <div style="margin:20px;">
+                <label for="password">Password</label>
+                <input type="password" placeholder="password" name="password" id="password" required>
+            </div> 
+            <div style="margin:20px; margin-left:45px;">
+                <label for="email">Email</label>
+                <input type="email" placeholder="email" name="email" id="email" required>
+            </div>
+            <div style="margin:20px;">
+                <label for="mobile">Mobile</label>
+                <input type="number" placeholder="mobile number" name="contact" id="mobile" required>
+            </div>
+            <button class="btn btn-warning">Register</button>
         </form>
-
-</body>
-</html>
+</div>

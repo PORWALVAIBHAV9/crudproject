@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Homepage</h1> 
-    <button><a href="/register">Register</a></button>
-    <button><a href="/login">Login</a></button>
-</body>
-</html>
+<% layout('layouts/boilerplate') %>
+    <div id="homepage" style="margin-top:22%; border: solid 1px; width:400px; padding:10px; text-align:center; margin-left: 550px;">
+        <h1>Welcome To Homepage</h1> 
+        <a href="/register"><button class="btn btn-warning">Register</button></a>
+        <a href="/login"><button class="btn btn-success">Login</button></a>
+        
+    </div>     

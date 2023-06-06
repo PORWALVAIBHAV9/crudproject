@@ -1,28 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Userinfo</title>
-</head>
-<body>
-    <h1>User Details</h1>
-    <h3>username: <%=user[0].username%> </h3>
-    <h3>Mobile: <%=user[0].contact%> </h3>
-    <h3>Email: <%=user[0].email%> </h3>
+<% layout('layouts/boilerplate') %>
+<div style="margin:30px;">
+    <h3 style="color: green;">User Details</h3>
+    <p>Username: <%=user[0].username%></p> 
+    <p>Mobile: <%=user[0].contact%> </p> 
+    <p>Email: <%=user[0].email%> </p> 
     
-    <button><a href="/login/user/updateinfo/<%=user[0]._id%>">update</a></button>
-    <button><a href="/login/user/changepassword/<%=user[0]._id%>">Change Password</a></button>
+    <a href="/login/user/updateinfo/<%=user[0]._id%>"><button class="btn btn-info" style="display: inline;">Update</button></a>
+    <a href=href="/login/user/changepassword/<%=user[0]._id%>"><button class="btn btn-secondary">Change Password</button></a>
     <form action="/login/user/delete_user/<%=user[0]._id%>/?_method=delete" method="post">
-        <button>Delete user</button>
+        <button class="btn btn-danger" style="margin-top:10px;">Delete user</button>
     </form>
 
     <%if (user[0].username=="admin"){%>
-        <button><a href="/login/user/admin/allusers">See all users</a></button>
+        <button style="margin-top:10px;"><a href="/login/user/admin/allusers">See all users</a></button>
     <% } %>
-    
-</body>`
-
-
-</html> 
+</div>

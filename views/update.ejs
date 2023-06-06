@@ -1,22 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-</head>
-<body>
-    <h1>Update user info</h1>
+<% layout('layouts/boilerplate') %>
+<div style="text-align: center; display:flex; flex-direction:column; margin-top: 250px; border: solid 2px; padding:10px; max-width: 400px; margin-left:550px;">
+    <h1 style="color:yellowgreen;">Update user info</h1>
         <form action="/login/user/updateinfo/<%=user._id%>/?_method=put" method="post">
-            <label for="username">Username</label>
-            <input type="text" placeholder="username" name="username" id="username" value="<%=user.username%>" required>
-            <label for="email">Email</label>
-            <input type="email" placeholder="email" name="email" id="email"  value="<%=user.email%>" required>
-            <label for="mobile">Mobile</label>
-            <input type="number" placeholder="mobile number" name="contact" id="mobile" value="<%=user.contact%>" required>
-            <button>Submit</button>
+            <div style="margin:20px;">
+                <label for="username">Username</label>
+                <input type="text" placeholder="username" name="username" id="username" value="<%=user.username%>" required>
+            </div>
+            <div style="margin:40px; margin-left:70px;">
+                <label for="email">Email</label>
+                <input type="email" placeholder="email" name="email" id="email"  value="<%=user.email%>" required>
+            </div>
+            <div style="margin:40px; margin-left:60px;">
+                <label for="mobile">Mobile</label>
+                <input type="number" placeholder="mobile number" name="contact" id="mobile" value="<%=user.contact%>" required>
+            </div>
+            <button class="btn btn-success">Update</button>
         </form>
+</div>
 
-</body>
-</html>
